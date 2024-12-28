@@ -3,21 +3,24 @@ using UnityEngine;
 public class Drawer : MonoBehaviour
 {
     public string requiredItemID; // ID del objeto necesario para abrir el cajón
-    public Animator drawerAnimator; // Referencia al Animator del cajón
-    private bool isPlayerNearby = false; // Para saber si el jugador está cerca
+    public Animator drawerAnimator; 
+    private bool isPlayerNearby = false; 
     private bool isOpen = false; // Estado del cajón (abierto/cerrado)
 
     void Update()
     {
-        // Si el jugador está cerca y presiona la tecla O y no está abierto
-        if (isPlayerNearby && Input.GetKeyDown(KeyCode.O) && !isOpen)
+        if (isPlayerNearby && Input.GetKeyDown(KeyCode.K))
         {
-            TryOpenDrawer();
-        }
-        // Si el cajón está abierto y presionas la tecla C, ciérralo
-        else if (isPlayerNearby && Input.GetKeyDown(KeyCode.C) && isOpen)
-        {
-            TryCloseDrawer();
+            // Si el cajón está cerrado 
+            if (!isOpen)
+            {
+                TryOpenDrawer();
+            }
+            // Si el cajón está abierto
+            else
+            {
+                TryCloseDrawer();
+            }
         }
     }
 
@@ -65,10 +68,8 @@ public class Drawer : MonoBehaviour
         }
     }
 
-
     void TryCloseDrawer()
     {
-        // Activa la animación de cierre y cambia el estado del cajón a cerrado
         drawerAnimator.SetTrigger("CloseTrigger");
         isOpen = false; // El cajón está cerrado
         Debug.Log("Cajón cerrado.");

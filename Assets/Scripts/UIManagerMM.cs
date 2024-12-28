@@ -5,8 +5,8 @@ using UnityEngine.UI;
 
 public class UIManagerMM : MonoBehaviour
 {
-    public GameObject mainMenuPanel;      // Panel principal del menú
-    public GameObject settingsPanel;     // Panel de ajustes del menú
+    public GameObject mainMenuPanel;     
+    public GameObject settingsPanel;     
 
     void Start()
     {
@@ -22,21 +22,19 @@ public class UIManagerMM : MonoBehaviour
     public void ShowMainMenuPanel()
     {
         CleanPanel();
-        mainMenuPanel.SetActive(true);    // Activa el panel del menú principal
+        mainMenuPanel.SetActive(true);    
     }
 
     public void ShowSettingsPanel()
     {
         CleanPanel();
-        settingsPanel.SetActive(true);   // Activa el panel de configuraciones
+        settingsPanel.SetActive(true);   
     }
 
     public void Salir()
     {
         Application.Quit();
     }
-
-
 
 
     private float SFXVolume;

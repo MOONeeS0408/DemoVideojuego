@@ -3,14 +3,14 @@ using UnityEngine;
 public class NotePickup : MonoBehaviour
 {
     [SerializeField] private Material pageMaterial;  // Material que contiene la textura de la página
-    [SerializeField] private float pickupRange = 5f; // Rango en el que el jugador puede recoger la nota
-    [SerializeField] private GameObject pickupText; // Referencia al texto que se muestra cuando está cerca de la nota
+    [SerializeField] private float pickupRange = 5f; // Rango para recoger la nota
+    [SerializeField] private GameObject pickupText; 
     private bool isTaken = false;
     private Transform playerTransform;
 
     private void Start()
     {
-        // Encuentra al jugador en la escena
+       
         GameObject player = GameObject.FindGameObjectWithTag("Player");
         if (player != null)
         {
@@ -21,7 +21,7 @@ public class NotePickup : MonoBehaviour
             Debug.LogError("No se encontró al jugador en la escena. Asegúrate de que el objeto del jugador tenga la etiqueta 'Player'.");
         }
 
-        // Desactiva el texto inicialmente
+        
         if (pickupText != null)
         {
             pickupText.SetActive(false);
@@ -47,21 +47,19 @@ public class NotePickup : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        // Si el objeto que entra en el trigger es el jugador
+        
         if (other.CompareTag("Player"))
         {
-            // Muestra el texto indicando que se puede recoger la nota
             pickupText.SetActive(true);
         }
     }
 
-    // Llamado cuando otro collider sale del trigger
+  
     private void OnTriggerExit(Collider other)
     {
-        // Si el objeto que sale del trigger es el jugador
+        
         if (other.CompareTag("Player"))
         {
-            // Oculta el texto cuando el jugador se aleja
             pickupText.SetActive(false);
         }
     }
@@ -70,15 +68,14 @@ public class NotePickup : MonoBehaviour
     {
         isTaken = true;
 
-        // Desactiva la nota en el mundo (el objeto de la nota se desactiva)
-        Destroy(gameObject); // Elimina el objeto del mundo
-        // Desactiva el texto también
+       
+        Destroy(gameObject); 
+        
         if (pickupText != null)
         {
             pickupText.SetActive(false);
         }
 
-        // Si se tiene un material, se agrega al BookManager
         if (pageMaterial != null)
         {
             BookManager.Instance.AddPageMaterial(pageMaterial);

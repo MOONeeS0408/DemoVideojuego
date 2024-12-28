@@ -3,10 +3,10 @@ using System.Collections.Generic;
 
 public class BookManager : MonoBehaviour
 {
-    public static BookManager Instance; // Singleton
+    public static BookManager Instance; 
 
-    [SerializeField] private Renderer leftPageRenderer;  // El renderer de la página izquierda
-    [SerializeField] private Renderer rightPageRenderer; // El renderer de la página derecha
+    [SerializeField] private Renderer leftPageRenderer;  //  página izquierda
+    [SerializeField] private Renderer rightPageRenderer; // página derecha
     [SerializeField] private Material defaultMaterial;   // Material por defecto para la página
 
     [SerializeField] private List<Material> pageMaterials = new List<Material>();  // Lista de materiales para las páginas
@@ -24,7 +24,7 @@ public class BookManager : MonoBehaviour
     public void AddPageMaterial(Material material)
     {
         pageMaterials.Add(material);
-        UpdatePageMaterials();  // Actualiza las páginas después de agregar el material
+        UpdatePageMaterials(); 
     }
 
     // Método para actualizar las texturas de las páginas con los materiales de la lista
@@ -61,7 +61,7 @@ public class BookManager : MonoBehaviour
         if (currentPageIndex < pageMaterials.Count - 1)
         {
             currentPageIndex++;
-            UpdatePageMaterials();  // Actualiza las texturas al cambiar la página
+            UpdatePageMaterials(); 
         }
     }
 
@@ -71,7 +71,7 @@ public class BookManager : MonoBehaviour
         if (currentPageIndex > 0)
         {
             currentPageIndex--;
-            UpdatePageMaterials();  // Actualiza las texturas al cambiar la página
+            UpdatePageMaterials(); 
         }
     }
 

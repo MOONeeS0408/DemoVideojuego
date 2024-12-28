@@ -7,7 +7,7 @@ public class DemoEndTrigger : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            // Cambia a la escena "Fin de Demo"
+            // Cambia a la escena Fin de Demo
             SceneManager.LoadScene("EndDemo");
         }
     }

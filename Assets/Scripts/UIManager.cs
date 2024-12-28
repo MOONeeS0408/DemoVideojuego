@@ -56,7 +56,7 @@ public class UIManager : MonoBehaviour
             }
         }
 
-        // Asegúrate de no permitir otras acciones si el juego está pausado
+        
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             if (pausePanel.activeSelf)
@@ -136,38 +136,34 @@ public class UIManager : MonoBehaviour
     public void ReturnToPausePanel()
     {
         CleanPanel();
-        pausePanel.SetActive(true);         // Regresa al panel de pausa
-        Time.timeScale = 0;                 // Sigue pausado
+        pausePanel.SetActive(true);         
+        Time.timeScale = 0;                 
     }
     public void ShowSettingsPanel()
     {
         CleanPanel();
-        settingsPanel.SetActive(true);   // Activa el panel de configuraciones
+        settingsPanel.SetActive(true);   
     }
     public void ShowGameOverPanel()
     {
-
-        CleanPanel(); // Limpiar otros paneles
-
-        gameOverPanel.SetActive(true);  // Muestra el panel de Game Over
+        CleanPanel();
+        gameOverPanel.SetActive(true);  
         Time.timeScale = 0;
     }
 
     public void RestartGame()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);  // Reinicia la escena actual
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);  
     }
-
 
 
     public void GoToMainMenu()
     {
-        Time.timeScale = 1; // Asegúrate de que el tiempo vuelva a la normalidad
-        SceneManager.LoadScene("MainMenu"); // Carga la escena del menú principal
+        Time.timeScale = 1; 
+        SceneManager.LoadScene("MainMenu"); 
     }
 
 
-    // Configuración de volumen y pantalla
     private float SFXVolume;
     private float musicVolume;
     public Slider SFXSlider;
