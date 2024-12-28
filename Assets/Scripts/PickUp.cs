@@ -1,11 +1,11 @@
 using UnityEngine;
-
+using TMPro;
 public class Pickup : MonoBehaviour
 {
     public ItemData itemData; // Información del objeto
     private bool isPlayerNearby = false; 
-    public GameObject pickupText; 
-
+    public GameObject pickupText;
+    [SerializeField] private TMP_Text messageText;
     void Update()
     {
         if (isPlayerNearby && Input.GetKeyDown(KeyCode.E))
@@ -39,9 +39,13 @@ public class Pickup : MonoBehaviour
         if (inventoryManager != null)
         {
             inventoryManager.AddItem(itemData); // Añade el objeto al inventario
-            Debug.Log($"{itemData.itemName} recogido y añadido al inventario.");
-            Destroy(gameObject); 
-            pickupText.SetActive(false); 
+            Debug.Log($"{itemData.itemName} añadido al inventario.");
+            //Destroy(gameObject); 
+            gameObject.SetActive(false);
+            messageText.text = $"Se ha añadido \"{itemData.itemName}\" al inventario. Abre el inventario con (I)";
+            messageText.gameObject.SetActive(true);
+            pickupText.SetActive(false);
+            Invoke(nameof(FinishPickUpItem), 5f);
         }
         else
         {
@@ -49,4 +53,12 @@ public class Pickup : MonoBehaviour
         }
     }
 
+
+    private void FinishPickUpItem()
+    {
+
+        messageText.text = "";
+        messageText.gameObject.SetActive(false);
+        Destroy(gameObject);
+    }
 }

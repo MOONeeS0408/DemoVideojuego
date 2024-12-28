@@ -1,10 +1,16 @@
+using System.Collections;
+using TMPro;
 using UnityEngine;
 
 public class NotePickup : MonoBehaviour
 {
-    [SerializeField] private Material pageMaterial;  // Material que contiene la textura de la página
-    [SerializeField] private float pickupRange = 5f; // Rango para recoger la nota
-    [SerializeField] private GameObject pickupText; 
+    [SerializeField] private Material pageMaterial;  
+    [SerializeField] private float pickupRange = 5f; 
+    [SerializeField] private GameObject pickupText;
+
+    [SerializeField] private TMP_Text messageText;  
+    [SerializeField] private string noteName = "Nota importante"; // Nombre de la nota 
+
     private bool isTaken = false;
     private Transform playerTransform;
 
@@ -35,10 +41,8 @@ public class NotePickup : MonoBehaviour
         // Calcula la distancia entre el jugador y la nota
         float distanceToPlayer = Vector3.Distance(playerTransform.position, transform.position);
 
-        // Si el jugador está dentro del rango, activa el texto
         if (distanceToPlayer <= pickupRange && Input.GetKeyDown(KeyCode.F))
         {
-            
                 TakeNote();
         }
 
@@ -68,9 +72,11 @@ public class NotePickup : MonoBehaviour
     {
         isTaken = true;
 
-       
-        Destroy(gameObject); 
-        
+        gameObject.SetActive(false);
+
+        //Destroy(gameObject);
+        messageText.text = $"Se ha agregado \"{noteName}\"  a la libreta de notas. Checa la libreta de notas con la tecla (N).";
+        messageText.gameObject.SetActive(true);
         if (pickupText != null)
         {
             pickupText.SetActive(false);
@@ -80,5 +86,15 @@ public class NotePickup : MonoBehaviour
         {
             BookManager.Instance.AddPageMaterial(pageMaterial);
         }
+
+        Invoke(nameof(FinishNotePickup), 5f);
+    }
+
+    private void FinishNotePickup()
+    {
+ 
+        messageText.text = "";
+        messageText.gameObject.SetActive(false);
+        Destroy(gameObject);
     }
 }
